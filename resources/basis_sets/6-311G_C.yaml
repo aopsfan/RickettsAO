@@ -1,0 +1,30 @@
+#  6-311G  EMSL  Basis Set Exchange Library   1/12/16 10:47 AM
+# Elements                             References
+# --------                             ----------
+# H, Li - Ne: R. Krishnan, J.S. Binkley, R. Seeger and J.A. Pople,
+#             J. Chem. Phys. 72, 650 (1980)
+# Na - Ar:    A.D. McLean and G.S. Chandler J. Chem. Phys. 72, 5639, (1980).
+# K  - Ca:    J-P. Blaudeau, M. P. McGrath, L.A. Curtiss and L. Radom,
+#             J. Chem. Phys. 107, 5016 (1997).
+# Ga - Kr:    L. A. Curtiss, M. P. McGrath, J-P. Blandeau, N. E. Davis, 
+#             R. C. Binning, Jr. L. Radom, J. Chem. Phys. 103, 6104 (1995).
+# I      :    M.N. Glukhovstev, A. pross, M.P. McGrath, L. Radom, J. Chem. Phys.
+#             103, 1878 (1995)
+#   
+
+- C
+- - 1 S
+  - [4563.2400000,      0.00196665] 
+  - [682.0240000,       0.0152306]
+  - [154.9730000,       0.0761269]
+  - [44.4553000,        0.2608010]
+  - [13.0290000,        0.6164620]
+  - [1.8277300,         0.2210060]
+- - 2 SP
+  - [20.9642000,        0.1146600,        0.0402487]
+  - [4.8033100,         0.9199990,        0.2375940]
+  - [1.4593300,         -0.00303068,      0.8158540]
+- - 2 SP
+  - [0.4834560,         1.0000000,        1.0000000]
+- - 2 SP
+  - [0.1455850,         1.0000000,        1.0000000]
