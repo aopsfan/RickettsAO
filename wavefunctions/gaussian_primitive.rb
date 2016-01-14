@@ -1,16 +1,27 @@
+# gaussian_primitive.rb
+# 
+# Model for a single (uncontracted) Gaussian primitive, or GTO.
+
 class GaussianPrimitive
+  
+  # Property alpha
   attr_accessor :alpha
   
+  # Class instance variable for normalization
   @@normalize = false
   
+  # Setter for the class instance variable
   def self.normalize=(normalize)
     @@normalize = normalize
   end
   
+  # Initializer
   def initialize(alpha)
     @alpha = alpha
   end
   
+  # The normalization part for the wavefunction, provided
+  #   angular momentum. See equation (17).
   def n_constant(ang_moment)
     l = ang_moment.l
     m = ang_moment.m
@@ -23,6 +34,10 @@ class GaussianPrimitive
     pi_part * num_part / den_part**0.5
   end
   
+  # The wavefunction for this Gaussian primitive
+  # See equation 3.
+  # Returns a block with a position parameter.
+  # Copies many properties to avoid scoping issues.
   def wavefunction(ang_moment)
     l = ang_moment.l
     m = ang_moment.m
@@ -38,10 +53,12 @@ class GaussianPrimitive
   
   private
   
+  # exp(x) = e^x
   def exp(x)
     (Math::E) ** (x)
   end
   
+  # semifact(x) = (2x - 1)!!
   def semifact(x)
     (1..x).reduce(1) do |memo, acc|
       memo * (2 * acc - 1)
