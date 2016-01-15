@@ -1,3 +1,8 @@
+# wavefunction_plot.rb
+#
+# Helper file that fills out some basic properties of a gruff
+#   plot.
+
 module WavefunctionPlot
   def WavefunctionPlot.plot(title='Wavefunction')
     g = Gruff::Line.new

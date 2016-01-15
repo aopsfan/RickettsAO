@@ -1,0 +1,53 @@
+#  6-311G  EMSL  Basis Set Exchange Library   1/12/16 10:47 AM
+# Elements                             References
+# --------                             ----------
+# H, Li - Ne: R. Krishnan, J.S. Binkley, R. Seeger and J.A. Pople,
+#             J. Chem. Phys. 72, 650 (1980)
+# Na - Ar:    A.D. McLean and G.S. Chandler J. Chem. Phys. 72, 5639, (1980).
+# K  - Ca:    J-P. Blaudeau, M. P. McGrath, L.A. Curtiss and L. Radom,
+#             J. Chem. Phys. 107, 5016 (1997).
+# Ga - Kr:    L. A. Curtiss, M. P. McGrath, J-P. Blandeau, N. E. Davis, 
+#             R. C. Binning, Jr. L. Radom, J. Chem. Phys. 103, 6104 (1995).
+# I      :    M.N. Glukhovstev, A. pross, M.P. McGrath, L. Radom, J. Chem. Phys.
+#             103, 1878 (1995)
+#   
+
+# SPECIAL NOTE: format from this basis set differs noticably from others.
+# Results seem skewed.
+
+---
+
+- Si
+- - 1 S
+  - [69379.2300000,         0.0007570]
+  - [10354.9400000,         0.0059320]
+  - [2333.8796000,          0.0310880]
+  - [657.1429500,           0.1249670]
+  - [214.3011300,           0.3868970]
+  - [77.6291680,            0.5548880]
+- - 2 S
+  - [77.6291680,            0.1778810]
+  - [30.6308070,            0.6277650]
+  - [12.8012950,            0.2476230]
+- - 3 S
+  - [3.9268660,             1.0000000]
+- - 3 S
+  - [1.4523430,             1.0000000]
+- - 3 S
+  - [0.2562340,             1.0000000]
+- - 3 S
+  - [0.0942790,             1.0000000]
+- - 2 P
+  - [335.4831900,           0.0088660]
+  - [78.9003660,            0.0682990]
+  - [24.9881500,            0.2909580]
+  - [9.2197110,             0.7321170]
+- - 3 P
+  - [3.6211400,             0.6198790]
+  - [1.4513100,             0.4391480]
+- - 3 P
+  - [0.5049770,             1.0000000]
+- - 3 P
+  - [0.1863170,             1.0000000]
+- - 3 P
+  - [0.0654320,             1.0000000]
