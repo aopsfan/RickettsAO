@@ -1,22 +1,15 @@
 class Interpreter
-  attr_reader :commands
+  attr_accessor :delegate
   
-  def initialize
-    @commands = []
-  end
-  
-  def add_command(key, &block)
-    @commands << Command.new(key, &block)
+  def initialize(delegate)
+    @delegate = delegate
   end
   
   def execute(console, line) # -> "load_basis_set basis_set=STO-3G element=H"
     parts = line.split(' ') # ["load_basis_set", "basis_set=STO-3G", "element=H"]
-    
     command_key = parts[0].to_sym # :load_basis_set
-    command = @commands.find {|c| c.key == command_key}
-    
     arg_formats = parts.reject.with_index {|p, index| index == 0} # ["basis_set=STO-3G", "element=H"]
-    command.execute(console, arguments_with(arg_formats))
+    delegate.send(command_key, console, arguments_with(arg_formats))
   end
   
   private

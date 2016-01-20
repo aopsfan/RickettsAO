@@ -4,7 +4,6 @@ class Console
   include Singleton
   
   attr_accessor :interpreter
-  attr_reader :client, :memory
   
   def initialize
     @client = HighLine.new
@@ -36,6 +35,14 @@ class Console
   def close
     @is_open = false
     log("Closed console.")
+  end
+  
+  def method_missing(method_name, *args)
+    if @memory[method_name] == nil
+      super
+    else
+      @memory[method_name]
+    end
   end
   
   private
