@@ -37,8 +37,8 @@ class BasisSetController
   end
   
   # Load table using table_lookup
-  def load_table
-    @table_lookup.load_table("enter orbital name: ")
+  def load_table(orbital_name)
+    @table_lookup.load_table(orbital_name)
   end
   
   # Write graphs using WavefunctionPlot.
@@ -54,12 +54,6 @@ class BasisSetController
       
       g.write("#{filepath}/#{basis_set.element}_#{n}_#{basis_set_name}.png")
     end
-  end
-  
-  # Whether the user has quit looking up tables, retrieved from
-  #   table_lookup
-  def user_quit?
-    @table_lookup.user_quit
   end
   
   # String representation of the controller, printing the element

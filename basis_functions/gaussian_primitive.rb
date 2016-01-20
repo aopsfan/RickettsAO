@@ -23,13 +23,9 @@ class GaussianPrimitive
   # The normalization part for the wavefunction, provided
   #   angular momentum. See equation (17).
   def n_constant(ang_moment)
-    l = ang_moment.l
-    m = ang_moment.m
-    n = ang_moment.n
-    
     pi_part  = (2.0 / Math::PI)**0.75
-    num_part = 2.0**(l+m+n) * @alpha**((2.0*(l+m+n) + 3.0) / 4.0)
-    den_part = semifact(l) * semifact(m) * semifact(n)
+    num_part = 2.0**(ang_moment.quantum_number) * @alpha**((2.0*(ang_moment.quantum_number) + 3.0) / 4.0)
+    den_part = semifact(ang_moment.l) * semifact(ang_moment.m) * semifact(ang_moment.n)
     
     pi_part * num_part / den_part**0.5
   end
@@ -39,15 +35,12 @@ class GaussianPrimitive
   # Returns a block with a position parameter.
   # Copies many properties to avoid scoping issues.
   def wavefunction(ang_moment)
-    l = ang_moment.l
-    m = ang_moment.m
-    n = ang_moment.n
+    ang_moment_dup = ang_moment
     alpha = @alpha
     normalization = @@normalize ? n_constant(ang_moment) : 1
     
     lambda do |pos|
-      ang_moment_part = pos.x**l * pos.y**m * pos.z**n
-      ang_moment_part * normalization * exp(-1.0 * alpha * pos.r**2.0)
+      normalization * ang_moment_dup.contribution(pos) * exp(-1.0 * alpha * pos.r**2.0)
     end
   end
   

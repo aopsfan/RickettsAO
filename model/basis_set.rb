@@ -4,10 +4,11 @@
 
 class BasisSet
   
-  # Properties partials, element
+  # Properties name, partials, element
+  # name is simply the name of the basis set, i. e. "6-311G"
   # element is the symbol for an element on the Periodic Table
   # partials is a list of BasisSetPartial instances
-  attr_accessor :partials, :element
+  attr_accessor :name, :partials, :element
   
   # Constant listing orbital characters in order from smallest
   #   to largest angular momentum
@@ -17,7 +18,8 @@ class BasisSet
   # Sets element to first component, and maps following components
   #   to BasisSetPartial elements, which are then added to the
   #   partials array.
-  def initialize(components=[])
+  def initialize(name, components=[])
+    @name = name
     @element = components[0]
     partial_components = components.reject.with_index{|c, index| index == 0}
     @partials = partial_components.map {|component| BasisSetPartial.new(component)}

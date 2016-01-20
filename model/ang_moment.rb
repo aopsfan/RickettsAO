@@ -20,6 +20,12 @@ class AngMoment
     @l + @m + @n
   end
   
+  # The Cartesian "contribution" of the angular momentum;
+  #   a function describing shape.
+  def contribution(pos)
+    (pos.x**@l) * (pos.y**@m) * (pos.z**@n)
+  end
+  
   # The character of an orbital with this angular momentum
   # Creates a hash pointing quantum numbers to character symbols,
   #   then returns the value of the hash for this quantum number.

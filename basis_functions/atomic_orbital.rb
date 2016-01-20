@@ -63,6 +63,7 @@ class AtomicOrbital
   def wavefunction
     normalization = @@normalize ? n_constant : 1
     basis_functions = @basis_functions.dup
+    ang_moment_dup = @ang_moment
     
     lambda do |pos|
       normalization * basis_functions.reduce(0.0) do |memo, func|
