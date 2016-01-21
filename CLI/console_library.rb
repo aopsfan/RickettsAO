@@ -1,54 +1,52 @@
 class ConsoleLibrary
-  def close(c, args)
-    c.close
+  def initialize(console)
+    @console = console
+  end
+  
+  def close
+    @console.close
   end
 
-  def dump(c, args)
-    c.dump
+  def dump
+    @basis_set = nil
+    @basis_set_controller = nil
+    @console.log("Cleared all memory.")
   end
 
-  def load(c, args)
-    full_name = "#{args[:name]}_#{args[:element]}"
+  def attach(name, element)
+    full_name = "#{name}_#{element}"
     raw_basis_set = File.open("resources/basis_sets/#{full_name}.yaml").read
     components = YAML.load(raw_basis_set)
     
-    c.attach(:basis_set, BasisSet.new(args[:name], components))
+    @basis_set = BasisSet.new(name, components)
+    @console.log(:basis_set, @basis_set)
   end
 
-  def pretty_print(c, args)
-    basis_set = c.basis_set
-    c.log("Basis set #{basis_set.name}: #{basis_set.contraction}.")
-    c.log(c.basis_set.gaussian94_format)
+  def pretty_print
+    @console.log("Basis set #{@basis_set.name}: #{@basis_set.contraction}.")
+    @console.log(@basis_set.gaussian94_format)
   end
 
-  def normalize(c, args)
-    normalize_primitives = args[:primitives] == nil ? true : args[:primitives]
-    normalize_functions = args[:functions] == nil ? false : args[:functions]
-    normalize_orbitals = args[:orbitals] == nil ? false : args[:orbitals]
+  def normalize(primitives=true, functions=false, orbitals=false)
+    GaussianPrimitive.normalize = primitives
+    BasisFunction.normalize = functions
+    AtomicOrbital.normalize = orbitals
     
-    GaussianPrimitive.normalize = normalize_primitives
-    BasisFunction.normalize = normalize_functions
-    AtomicOrbital.normalize = normalize_orbitals
-    
-    c.log("Updated normalization settings.")
+    @console.log("Updated normalization settings.")
   end
 
-  def configure(c, args)
-    basis_set = c.basis_set
-    c.attach(:basis_set_controller, BasisSetController.new(basis_set))
+  def configure
+    @basis_set_controller = BasisSetController.new(@basis_set)
+    @console.log(:basis_set_controller, @basis_set_controller)
   end
 
-  def write_graphs(c, args)
-    basis_set = c.basis_set
-    controller = c.basis_set_controller
-    controller.write_graphs(basis_set.name, "resources/graphs")
-
-    c.log("Output graphs to resources/graphs")
+  def write_graphs
+    @basis_set_controller.write_graphs(@basis_set.name, "resources/graphs")
+    @console.log("Output graphs to resources/graphs")
   end
 
-  def load_table(c, args)
-    controller = c.basis_set_controller
-    controller.load_table(args[:orbital])
+  def load_table(orbital)
+    @basis_set_controller.load_table(orbital)
   end
   
   def method_missing(method_name, *args)

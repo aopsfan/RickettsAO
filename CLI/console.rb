@@ -8,21 +8,10 @@ class Console
   def initialize
     @client = HighLine.new
     @is_open = true
-    @memory = {}
   end
   
-  def attach(key, value)
-    @memory[key] = value
-    log("#{key} -> #{value}")
-  end
-  
-  def dump
-    @memory = nil
-    log("All memory cleared.")
-  end
-  
-  def log(message)
-    puts message
+  def log(descriptor="", message)
+    puts "#{descriptor} -> #{message}"
   end
   
   def open
@@ -48,7 +37,7 @@ class Console
   private
   
   def get_line
-    line = @client.ask "RickettsAO: console -> "
-    @interpreter.execute(self, line)
+    line = @client.ask "[[[[RickettsAO: console]]]] > "
+    @interpreter.execute(line)
   end
 end
