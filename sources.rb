@@ -22,9 +22,9 @@ require_relative 'CLI/console'
 require_relative 'CLI/interpreter'
 require_relative 'CLI/console_library'
 
-require 'gruff'
 require 'yaml'
 require 'highline'
+require 'gnuplot'
 
 # DEFAULT NORMALIZATION SETUP
 #
@@ -34,6 +34,7 @@ AtomicOrbital.normalize = true
 
 # INTERPRETER/CONSOLE SETUP
 #
-library = ConsoleLibrary.new
-interpreter = Interpreter.new(library)
+interpreter = Interpreter.new
+library = ConsoleLibrary.new(Console.instance)
+interpreter.delegate = library
 Console.instance.interpreter = interpreter

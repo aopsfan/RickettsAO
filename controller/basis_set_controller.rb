@@ -46,13 +46,25 @@ class BasisSetController
   #   a file.
   def write_graphs(basis_set_name, filepath)
     energy_levels.each do |n, orbitals|
-      g = WavefunctionPlot.plot("#{basis_set.element} - n=#{n} - #{basis_set_name}")
-      
-      orbitals.each do |o|
-        g.data o.name, @table_lookup[o.name].map{|key, value| value}
+      Gnuplot.open do |gp|
+        Gnuplot::Plot.new(gp) do |plot|
+          plot.terminal "png"
+          plot.output File.expand_path("../../#{filepath}/#{basis_set.element}_#{n}_#{basis_set_name}.png", __FILE__)
+          
+          plot.title "#{basis_set.element} - n=#{n} - #{basis_set_name}"
+          plot.xlabel "r"
+          plot.ylabel "wf"
+          
+          orbitals.each do |o|
+            x = @table_lookup[o.name].map{|k, v| k}
+            y = @table_lookup[o.name].map{|k, v| v}
+            plot.data << Gnuplot::DataSet.new([x,y]) do |ds|
+              ds.with = "points"
+              ds.title = o.name
+            end
+          end
+        end
       end
-      
-      g.write("#{filepath}/#{basis_set.element}_#{n}_#{basis_set_name}.png")
     end
   end
   
@@ -80,9 +92,9 @@ class BasisSetController
   
   # All points in Cartesian space used
   # Returns Position instances with x-values ranging from 0 to
-  #   3 in increments of 0.1. y and z will be 0.
+  #   3 in increments of 0.01. y and z will be 0.
   def positions
-    steps = 0.step(3, 0.1)
+    steps = 0.step(3, 0.01)
     steps.map{|s| Position.new(s)}
   end
 end
