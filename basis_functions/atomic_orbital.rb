@@ -67,7 +67,7 @@ class AtomicOrbital
     
     lambda do |pos|
       normalization * basis_functions.reduce(0.0) do |memo, func|
-        memo + func.wavefunction(@ang_moment).call(pos)
+        memo + func.wavefunction(ang_moment_dup).call(pos)
       end
     end
   end
@@ -76,7 +76,7 @@ class AtomicOrbital
   #   angular momentum, number of functions, and the string
   #   representations of each of the functions.
   def to_s
-    "#{name} orbital: x^#{ang_moment.l} y^#{ang_moment.m} z^#{ang_moment.n}, #{basis_functions.length} function(s):\n" + 
+    "#{name}, #{basis_functions.length} function(s):\n" + 
     basis_functions.map{|function| "\t\t" + function.to_s}.join(",\n")
   end
 end

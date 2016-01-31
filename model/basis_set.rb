@@ -40,25 +40,35 @@ class BasisSet
     @partials.reduce(0) {|memo, partial| memo + partial.basis_functions_length(character)}
   end
   
+  def characters
+    BasisSet::CHARACTERS.select do |character|
+      valid = basis_functions_length(character) > 0
+      yield(character) if block_given? && valid # avoid iterating over arrays twice
+      valid
+    end
+  end
+  
   # String representing total number of primitives and the
   #   total number of basis functions for each orbital character
   #   in the basis set.
   # Returns a string based on primitives_length,
   #   basis_functions_length, and BasisSet::CHARACTERS.
   def contraction
-    characters = BasisSet::CHARACTERS
-    
-    primitives = characters.reduce([]) do |memo, character|
-      length = primitives_length(character)
-      length == 0 ? memo : memo << "#{length}#{character.to_s}"
+    primitives = []
+    characters do |character|
+      primitives << "#{primitives_length(character)}#{character.to_s}"
     end
     
-    basis_functions = characters.reduce([]) do |memo, character|
-      length = basis_functions_length(character)
-      length == 0 ? memo : memo << "#{length}#{character.to_s}"
+    basis_functions = []
+    characters do |character|
+      basis_functions << "#{basis_functions_length(character)}#{character.to_s}"
     end
     
     "(#{primitives.join(',')}) -> [#{basis_functions.join(',')}]"
+  end
+  
+  def to_s
+    [name, element, contraction].join(", ")
   end
   
   # The Gaussian94 format for the entire basis set

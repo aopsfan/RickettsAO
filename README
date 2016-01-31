@@ -1,0 +1,39 @@
+ -> Opened console
+{ RickettsAO | console } > attach '6-31G' 'S'
+basis_sets -> ['6-31G, S: (16s,10p) -> [4s,3p]']
+{ RickettsAO | console } > attach '6-31G' 'Si'
+basis_sets -> ['6-31G, S: (16s,10p) -> [4s,3p]',
+               '6-31G, Si: (16s,10p) -> [4s,3p]']
+{ RickettsAO | console } > configure 0 3 0.01
+configuration_controller -> 2 basis set(s), 18 atomic orbital(s), range 0-3 A in steps of 0.01:
+  S: 1s, 2s, 2p_x, 2p_y, 2p_z, 3s, 3p_x, 3p_y, 3p_z
+  Si: 1s, 2s, 2p_x, 2p_y, 2p_z, 3s, 3p_x, 3p_y, 3p_z
+{ RickettsAO | console } > plot n=1
+plots -> ['S - 1s', 'Si - 1s']
+{ RickettsAO | console } > plot n=2
+plots -> ['S - 1s', 'Si - 1s', 'S - 2s', 'S - 2p_x', 'S - 2p_y',
+          'S - 2p_z', 'Si - 2s', 'Si - 2p_x', 'Si - 2p_y', 'Si - 2p_z']
+{ RickettsAO | console } > write_plots 'S_Si_core'
+ -> Wrote 10 plot(s) to resources/graphs/S_Si_core.png
+{ RickettsAO | console } > plot n=3
+plots -> ['S - 3s', 'S - 3p_x', 'S - 3p_y', 'S - 3p_z', 'Si - 3s',
+          'Si - 3p_x', 'Si - 3p_y', 'Si - 3p_z']
+{ RickettsAO | console } > write_plots 'S_Si_valence'
+ -> Wrote 8 plot(s) to resources/graphs/S_Si_valence.png
+{ RickettsAO | console } > dump
+ -> Cleared all memory
+{ RickettsAO | console } > attach '6-31G' 'C'
+basis_sets -> ['6-31G, C: (10s,4p) -> [3s,2p]']
+{ RickettsAO | console } > configure 0 3 0.01
+configuration_controller -> 1 basis set(s), 5 atomic orbital(s), range 0-3 A in steps of 0.01:
+  C: 1s, 2s, 2p_x, 2p_y, 2p_z
+{ RickettsAO | console } > plot char=s
+plots -> ['C - 1s', 'C - 2s']
+{ RickettsAO | console } > write_plots 'C_s'
+ -> Wrote 2 plot(s) to resources/graphs/C_s.png
+{ RickettsAO | console } > plot char=p
+plots -> ['C - 2p_x', 'C - 2p_y', 'C - 2p_z']
+{ RickettsAO | console } > write_plots 'C_p'
+ -> Wrote 2 plot(s) to resources/graphs/C_s.png
+{ RickettsAO | console } > close
+ -> Closed console

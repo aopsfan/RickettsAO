@@ -10,8 +10,12 @@ class Console
     @is_open = true
   end
   
-  def log(descriptor="", message)
-    puts "#{descriptor} -> #{message}"
+  def log(message)
+    message.split("\n").each {|part| puts "< RickettsAO > #{part}"}
+  end
+  
+  def log_state(attribute, state)
+    puts "< RickettsAO | #{attribute} > #{state}"
   end
   
   def open
@@ -37,7 +41,7 @@ class Console
   private
   
   def get_line
-    line = @client.ask "[[[[RickettsAO: console]]]] > "
+    line = @client.ask "< RickettsAO | input > "
     @interpreter.execute(line)
   end
 end
